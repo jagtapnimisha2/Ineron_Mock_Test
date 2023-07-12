@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    .modal-content {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      max-width: 400px;
+      border-radius: 5px;
+      z-index: 10000;
+    }
+
+    .close-button {
+      display: block;
+      text-align: right;
+      cursor: pointer;
+    }
+    body.modal-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+    <!-- Question_6:- 6. Create a custom modal window using HTML, CSS, and JavaScript. On clicking a button the modal window should appear and the user can click outside the modal window to close the modal along with a close button which is inside the modal. Also when the modal is open the window should not be scrollable -->
+  <button onclick="openModal()">Open Modal</button>
+
+  <div class="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal()">&times;</span>
+    <h2>Modal Content</h2>
+    <p>This is the content of the modal window.</p>
+  </div>
+
+  <script>
+    function openModal() {
+      var modalOverlay = document.querySelector('.modal-overlay');
+      var modalContent = document.querySelector('.modal-content');
+      var body = document.querySelector('body');
+
+      modalOverlay.style.display = 'block';
+      modalContent.style.display = 'block';
+      body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      var modalOverlay = document.querySelector('.modal-overlay');
+      var modalContent = document.querySelector('.modal-content');
+      var body = document.querySelector('body');
+
+      modalOverlay.style.display = 'none';
+      modalContent.style.display = 'none';
+      body.classList.remove('modal-open');
+    }
+  </script>
+</body>
+</html>

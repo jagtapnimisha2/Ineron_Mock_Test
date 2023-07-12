@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+          color: red;
+        }
+      </style>
+</head>
+<body>
+    <!-- Question_5:- 5. Create a form with proper form validation using JavaScript (name, email, phone number, password, age, gender, date, color picker) -->
+      <form id="myForm" onsubmit="validateForm(event)">
+        <div>
+          <label for="name">Name:  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;</label>
+          <input type="text" id="name" required>
+          <div id="nameError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="email">Email: &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;</label>
+          <input type="email" id="email" required>
+          <div id="emailError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" required>
+          <div id="phoneError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="password">Password:  &nbsp;  &nbsp;  &nbsp;  &nbsp;</label>
+          <input type="password" id="password" required>
+          <div id="passwordError" class="error"></div>
+        </div><br>
+        <div>
+          <label for="age">Age:  &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; </label>
+          <input type="number" id="age" required>
+          <div id="ageError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="gender">Gender:  &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; </label>
+          <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <div id="genderError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="date">Date:  &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;</label>
+          <input type="date" id="date" required>
+          <div id="dateError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <label for="color">Favorite Color:  &nbsp;</label>
+          <input type="color" id="color" required>
+          <div id="colorError" class="error"></div>
+        </div>
+        <br>
+        <div>
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+      
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Reset previous error messages
+      resetErrors();
+
+      // Get form inputs
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      var password = document.getElementById('password').value;
+      var age = document.getElementById('age').value;
+      var gender = document.getElementById('gender').value;
+      var date = document.getElementById('date').value;
+      var color = document.getElementById('color').value;
+
+      // Validate name
+      if (name === '') {
+        showError('name', 'Name is required');
+      }
+
+      // Validate email
+      if (email === '') {
+        showError('email', 'Email is required');
+      } else if (!validateEmail(email)) {
+        showError('email', 'Invalid email format');
+      }
+
+      // Validate phone number
+      if (phone === '') {
+        showError('phone', 'Phone number is required');
+      } else if (!validatePhoneNumber(phone)) {
+        showError('phone', 'Invalid phone number format');
+      }
+
+      // Validate password
+      if (password === '') {
+        showError('password', 'Password is required');
+      }
+
+      // Validate age
+      if (age === '') {
+        showError('age', 'Age is required');
+      } else if (isNaN(age) || age < 0) {
+        showError('age', 'Invalid age');
+      }
+
+      // Validate gender
+      if (gender === '') {
+        showError('gender', 'Gender is required');
+      }
+
+      // Validate date
+      if (date === '') {
+        showError('date', 'Date is required');
+      }
+
+      // Validate color
+      if (color === '') {
+        showError('color', 'Favorite color is required');
+      }
+
+      // If there are no errors, submit the form
+      if (!hasErrors()) {
+        document.getElementById('myForm').submit();
+      }
+    }
+
+    function showError(fieldId, errorMessage) {
+      var errorElement = document.getElementById(fieldId + 'Error');
+      errorElement.textContent = errorMessage;
+    }
+
+    function resetErrors() {
+      var errorElements = document.getElementsByClassName('error');
+      Array.from(errorElements).forEach(function(element) {
+        element.textContent = '';
+      });
+    }
+
+    function validateEmail(email) {
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validatePhoneNumber(phone) {
+      var phoneRegex = /^\d{10}$/;
+      return phoneRegex.test(phone);
+    }
+
+    function hasErrors() {
+      var errorElements = document.getElementsByClassName('error');
+      for (var i = 0; i < errorElements.length; i++) {
+        if (errorElements[i].textContent !== '') {
+          return true;
+        }
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>

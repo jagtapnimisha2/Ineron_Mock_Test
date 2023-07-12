@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f5f5f5;
+    }
+
+    .navbar-logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .navbar-menu {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar-menu li {
+      margin-right: 10px;
+    }
+
+    .navbar-menu li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+    }
+    .hamburger-menu {
+      display: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    @media (max-width: 768px) {
+      .navbar-menu {
+        display: none;
+      }
+
+      .navbar-menu.show {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f5f5f5;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 10px;
+      }
+
+      .navbar-menu.show li {
+        margin-bottom: 10px;
+      }
+
+      .navbar-menu.show li a {
+        color: #333;
+        font-size: 16px;
+        padding: 5px;
+      }
+
+      .hamburger-menu {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Question_4:- Build a responsive Navbar, on smaller screens it should be a hamburger menu which on click should reveal the menu items nicely, and on larger screens they should be displayed directly on the screen -->
+  <nav class="navbar">
+    <div class="navbar-logo">Logo</div>
+    <div class="hamburger-menu">&#9776;</div>
+    <ul class="navbar-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    var hamburgerMenu = document.querySelector('.hamburger-menu');
+    var navbarMenu = document.querySelector('.navbar-menu');
+
+    hamburgerMenu.addEventListener('click', function() {
+      navbarMenu.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
